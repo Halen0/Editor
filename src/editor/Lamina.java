@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JMenu;
@@ -13,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.undo.UndoManager;
 
 public class Lamina extends JPanel {
@@ -48,7 +51,6 @@ public class Lamina extends JPanel {
 	}
 
 	private void menuBar(final JPanel panel) {
-
 		archivo.add(menuItem("Nuevo"));
 		archivo.add(menuItem("Abrir"));
 		archivo.add(menuItem("Guardar"));
@@ -73,10 +75,46 @@ public class Lamina extends JPanel {
 
 	private JMenuItem menuItem(String nombre) {
 		JMenuItem menuItem = new JMenuItem(nombre);
+		atajosTeclado(menuItem);
 		eventos(menuItem);
 		return menuItem;
 	}
 
+	private void atajosTeclado(JMenuItem item) {
+		switch(item.getText()) {
+		case "Nuevo":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Abrir":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Guardar":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Guardar Como":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_DOWN_MASK+InputEvent.SHIFT_DOWN_MASK));
+			break;
+		case "Deshacer":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Rehacer":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Cortar":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Copiar":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Pegar":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK));
+			break;
+		case "Seleccionar Todo":
+			item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_DOWN_MASK));
+			break;
+		}
+	}
+	
 	private void eventos(JMenuItem item) {
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

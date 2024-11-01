@@ -102,7 +102,8 @@ public class Funciones {
 	}
 
 	public void fuente() {
-
+		Fuentes fuente = new Fuentes(area);
+		fuente.setVisible(true);
 	}
 
 }
